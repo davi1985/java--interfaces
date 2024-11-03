@@ -33,10 +33,7 @@ public class RentalService {
     }
 
     private double calculateBasicPayment(double hours) {
-        if (hours <= MAX_HOURS_FOR_HOURLY_RATE) {
-            return pricePerHour * Math.ceil(hours);
-        } else {
-            return pricePerDay * Math.ceil(hours / HOURS_IN_A_DAY);
-        }
+        return hours <= MAX_HOURS_FOR_HOURLY_RATE ? pricePerHour * Math.ceil(hours) :
+                pricePerDay * Math.ceil(hours / HOURS_IN_A_DAY);
     }
 }
