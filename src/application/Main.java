@@ -1,3 +1,5 @@
+package application;
+
 import model.entities.CarRental;
 import model.entities.Vehicle;
 import model.services.BrazilTaxService;
