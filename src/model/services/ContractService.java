@@ -9,11 +9,11 @@ public class ContractService {
 
     private final OnlineContractService onlineContractService;
 
-    public ContractService(OnlineContractService onlineContractService) {
+    public ContractService(final OnlineContractService onlineContractService) {
         this.onlineContractService = onlineContractService;
     }
 
-    public void processContract(Contract contract, int months) {
+    public void processContract(final Contract contract, final int months) {
         double basicQuota = contract.getTotalValue() / months;
 
         for (int i = 1; i <= months; i++) {
