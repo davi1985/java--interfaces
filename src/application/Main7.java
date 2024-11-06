@@ -3,6 +3,8 @@ package application;
 import model.services.BrazilianInterestService;
 import model.services.InterestService;
 import model.services.UsaInterestService;
+import model.services.exceptions.InvalidAmountException;
+import model.services.exceptions.InvalidMonthsException;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -17,19 +19,30 @@ public class Main7 {
 
         System.out.print("Months: ");
         int months = scanner.nextInt();
+        double payment;
 
         InterestService brazilianInterestService = new BrazilianInterestService(2.0);
-        double payment = brazilianInterestService.payment(amount, months);
+        try {
+            payment = brazilianInterestService.payment(amount, months);
 
-        System.out.println();
-        System.out.println("Payment after " + months + " months in BRL:");
-        System.out.printf("$ %.2f%n", payment);
+            System.out.println();
+            System.out.println("Payment after " + months + " months in BRL:");
+            System.out.printf("$ %.2f%n", payment);
+        } catch (InvalidMonthsException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
 
-        InterestService usaInterestService = new UsaInterestService(1.0);
-        payment = usaInterestService.payment(amount, months);
+        try {
+            InterestService usaInterestService = new UsaInterestService(1.0);
+            payment = usaInterestService.payment(amount, months);
 
-        System.out.println("Payment after " + months + " months in USA:");
-        System.out.printf("$ %.2f%n", payment);
+            System.out.println();
+            System.out.println("Payment after " + months + " months in USA:");
+            System.out.printf("$ %.2f%n", payment);
+        } catch (InvalidMonthsException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
+
         scanner.close();
     }
 }
